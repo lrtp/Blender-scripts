@@ -5,6 +5,6 @@ blender -b "path del file da renderizzare" -a blender -b "path del file da rende
 
 ES:
 cd "C:\Program Files\Blender Foundation\Blender 4.1"
-blender -b "C:\Users\alberto.palazzo\Desktop\Alunno\Render_edit\Alunno_overlap_Scene_2_Edit.blend" -a
-blender -b "C:\Users\alberto.palazzo\Desktop\Alunno\Render_edit\Alunno_piccadilly.blend" -a
+blender -b "C:\Users\alberto.palazzo\Desktop\xxx\Render_edit\xxx.blend" -a
+blender -b "C:\Users\alberto.palazzo\Desktop\xxx\Render_edit\xxx2.blend" -a
 cmd /k
