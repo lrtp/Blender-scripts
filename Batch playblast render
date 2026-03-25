@@ -1,0 +1,19 @@
+import bpy
+import os
+
+output_dir = r"D:output_folder_path""
+os.makedirs(output_dir, exist_ok=True)
+
+scene_names = ["SCENE_1", "SCENE_2", "SCENE_3", "ETC"]
+
+for scene_name in scene_names:
+    scene = bpy.data.scenes.get(scene_name)
+    if scene is None:
+        print(f"Scene not found: {scene_name}")
+        continue
+
+    bpy.context.window.scene = scene
+    scene.render.filepath = os.path.join(output_dir, scene.name + "_")
+    bpy.ops.render.opengl(animation=True)
+
+print("All done!")
