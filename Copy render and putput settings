@@ -1,0 +1,43 @@
+import bpy
+
+source_scene_name = "SCENE_1"
+target_scene_names = [
+    "SCENE_2",
+    "SCENE_3",
+    "SCENE_4",
+    "SCENE_5",
+    "SCENE_6",
+    "SCENE_7",
+    "SCENE_7_2",
+]
+
+src = bpy.data.scenes[source_scene_name]
+
+def copy_rna_properties(src_block, dst_block):
+    for prop in src_block.bl_rna.properties:
+        if prop.is_readonly:
+            continue
+        if prop.identifier in {"rna_type"}:
+            continue
+
+        try:
+            setattr(dst_block, prop.identifier, getattr(src_block, prop.identifier))
+        except Exception:
+            pass
+
+for name in target_scene_names:
+    dst = bpy.data.scenes.get(name)
+    if dst is None:
+        print(f"Scene not found: {name}")
+        continue
+
+    # Render settings
+    copy_rna_properties(src.render, dst.render)
+
+    # Image / video output settings
+    copy_rna_properties(src.render.image_settings, dst.render.image_settings)
+
+    # FFMPEG settings
+    copy_rna_properties(src.render.ffmpeg, dst.render.ffmpeg)
+
+print("Settings copied!")
